@@ -61,7 +61,7 @@ def main():
 
     time_image = Image.new('1', (96, 32), 255)  # 255: clear the frame
     draw = ImageDraw.Draw(time_image)
-    font = ImageFont.truetype('open-sans.ttf', 32)
+    font = ImageFont.truetype('open-sans.ttf', 12)
     image_width, image_height = time_image.size
     while (True):
         # draw a rectangle to clear the image
