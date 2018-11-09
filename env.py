@@ -39,7 +39,7 @@ def main():
 				epd.set_frame_memory(image, 0, 0)
 				epd.display_frame()
 
-				epd.delay_ms(2000)
+				epd.delay_ms(1000)
 
 				##
 				# there are 2 memory areas embedded in the e-paper display
@@ -51,6 +51,31 @@ def main():
 				epd.display_frame()
 				epd.clear_frame_memory(0xFF)
 				epd.display_frame()
+
+				# for partial update
+				epd.init(epd.lut_partial_update)
+				##
+				# there are 2 memory areas embedded in the e-paper display
+				# and once the display is refreshed, the memory area will be auto-toggled,
+				# i.e. the next action of SetFrameMemory will set the other memory area
+				# therefore you have to set the frame memory twice.
+				##
+				epd.set_frame_memory(image, 0, 0)
+				epd.display_frame()
+				epd.set_frame_memory(image, 0, 0)
+				epd.display_frame()
+
+				time_image = Image.new('1', (150, 32), 255)  # 255: clear the frame
+				draw = ImageDraw.Draw(time_image)
+				font = ImageFont.truetype('open-sans.ttf', 16)
+				image_width, image_height = time_image.size
+				while (True):
+					# draw a rectangle to clear the image
+					draw.rectangle((0, 0, image_width, image_height), fill = 255)
+					draw.text((0, 0), time.strftime('%M:%S'), font = font, fill = 0)
+					epd.set_frame_memory(time_image.rotate(270), 80, 80)
+					epd.display_frame()
+
 			else:
 				print "ERROR!"
 				while(1):
