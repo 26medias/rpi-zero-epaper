@@ -25,11 +25,11 @@ import ImageFont
 
 ccs =  Adafruit_CCS811()
 while not ccs.available():
-        pass
-        
+	pass
+
 def main():
-    epd = epd2in9.EPD()
-    epd.init(epd.lut_full_update)
+	epd = epd2in9.EPD()
+	epd.init(epd.lut_full_update)
 
 	while(1):
 		if ccs.available():
