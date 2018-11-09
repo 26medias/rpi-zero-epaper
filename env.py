@@ -59,15 +59,15 @@ def main():
 	epd.set_frame_memory(image, 0, 0)
 	epd.display_frame()
 
-	time_image = Image.new('1', (150, 32), 255)  # 255: clear the frame
+	time_image = Image.new('1', (150, 128), 255)  # 255: clear the frame
 	draw = ImageDraw.Draw(time_image)
 	font = ImageFont.truetype('open-sans.ttf', 16)
 	image_width, image_height = time_image.size
 	while (True):
 		# draw a rectangle to clear the image
-		draw.rectangle((0, 0, image_width, image_height), fill = 0)
-		draw.text((0, 0), time.strftime('%M:%S'), font = font, fill = 0)
-		epd.set_frame_memory(time_image, 80, 80)
+		draw.rectangle((0, 0, epd2in9.EPD_WIDTH, image_height), fill = 0)
+		draw.text((0, 0), time.strftime('%M:%S'), font = font, fill = 255)
+		epd.set_frame_memory(time_image, 0, 10)
 		epd.display_frame()
 
 
