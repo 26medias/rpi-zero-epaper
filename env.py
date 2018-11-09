@@ -1,3 +1,72 @@
+
+
+temp = ccs.calculateTemperature()
+ccs.tempOffset = temp - 25.0
+
+while(1):
+    if ccs.available():
+        temp = ccs.calculateTemperature()
+        if not ccs.readData():
+          print "CO2: ", ccs.geteCO2(), "ppm, TVOC: ", ccs.getTVOC(), " temp: ", temp
+
+        else:
+          print "ERROR!"
+          while(1):
+            pass
+    sleep(2)
+
+
+from Adafruit_CCS811 import Adafruit_CCS811
+import epd2in9
+import time
+import Image
+import ImageDraw
+import ImageFont
+
+ccs =  Adafruit_CCS811()
+while not ccs.available():
+        pass
+        
+def main():
+    epd = epd2in9.EPD()
+    epd.init(epd.lut_full_update)
+
+	while(1):
+		if ccs.available():
+			temp = ccs.calculateTemperature()
+			if not ccs.readData():
+				print "CO2: ", ccs.geteCO2(), "ppm, TVOC: ", ccs.getTVOC(), " temp: ", temp
+
+			else:
+				print "ERROR!"
+				while(1):
+					pass
+					sleep(2)
+
+
+
+   
+
+if __name__ == '__main__':
+    main()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 from Adafruit_CCS811 import Adafruit_CCS811
 import epd2in9
 import time
@@ -64,13 +133,21 @@ def main():
 	font = ImageFont.truetype('open-sans.ttf', 16)
 	image_width, image_height = time_image.size
 	while (True):
-		# draw a rectangle to clear the image
-		draw.rectangle((0, 0, epd2in9.EPD_WIDTH, image_height), fill = 0)
-		draw.text((0, 0), time.strftime('%M:%S'), font = font, fill = 255)
-		epd.set_frame_memory(time_image, 0, 10)
-		epd.display_frame()
-
-
+		
+		if ccs.available():
+			temp = ccs.calculateTemperature()
+			if not ccs.readData():
+				print "CO2: ", ccs.geteCO2(), "ppm, TVOC: ", ccs.getTVOC(), " temp: ", temp
+				draw.rectangle((0, 0, epd2in9.EPD_WIDTH, image_height), fill = 0)
+				draw.text((0, 0), time.strftime('%M:%S'), font = font, fill = 255)
+				draw.text((0, 24), 'CO2: %s'%(ccs.geteCO2()), font = font, fill = 255)
+				epd.set_frame_memory(time_image, 0, 10)
+				epd.display_frame()
+			else:
+				print "ERROR!"
+				while(1):
+					pass
+					sleep(2)
 
 	
 
