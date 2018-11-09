@@ -61,7 +61,7 @@ def main():
 
 	time_image = Image.new('1', (150, 128), 255)  # 255: clear the frame
 	draw = ImageDraw.Draw(time_image)
-	font = ImageFont.truetype('open-sans.ttf', 16)
+	font = ImageFont.truetype('open-sans.ttf', 12)
 	image_width, image_height = time_image.size
 	while (True):
 		
@@ -71,7 +71,9 @@ def main():
 				print "CO2: ", ccs.geteCO2(), "ppm, TVOC: ", ccs.getTVOC(), " temp: ", temp
 				draw.rectangle((0, 0, epd2in9.EPD_WIDTH, image_height), fill = 0)
 				draw.text((0, 0), time.strftime('%M:%S'), font = font, fill = 255)
-				draw.text((0, 24), 'CO2: %s'%(ccs.geteCO2()), font = font, fill = 255)
+				draw.text((0, 20), 'CO2: %sppm'%(ccs.geteCO2()), font = font, fill = 255)
+				draw.text((0, 40), 'Gas/Particulate: %s'%(ccs.getTVOC()), font = font, fill = 255)
+				draw.text((0, 60), 'Temperature: %s'%(temp), font = font, fill = 255)
 				epd.set_frame_memory(time_image, 0, 10)
 				epd.display_frame()
 			else:
