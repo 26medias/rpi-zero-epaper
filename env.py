@@ -65,6 +65,7 @@ def main():
 	image_width, image_height = time_image.size
 	while (True):
 		# draw a rectangle to clear the image
+		draw.rectangle((0, 0, image_width, image_height), fill = 0)
 		draw.text((0, 0), time.strftime('%M:%S'), font = font, fill = 0)
 		epd.set_frame_memory(time_image, 80, 80)
 		epd.display_frame()
