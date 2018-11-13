@@ -19,7 +19,7 @@ def main():
 	draw = ImageDraw.Draw(image)
 	font = ImageFont.truetype('/home/pi/demo/raspberrypi/python/open-sans.ttf', 16)
 	draw.rectangle((0, 10, 128, 34), fill = 0)
-	draw.text((8, 12), 'Air Quality Tracker', font = font, fill = 255)
+	draw.text((10, 12), 'Air Quality', font = font, fill = 255)
 	draw.text((8, 36), 'loading...', font = font, fill = 0)
 	
 	#draw.line((16, 60, 56, 60), fill = 0)
