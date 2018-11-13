@@ -73,7 +73,7 @@ def main():
 			if not ccs.readData():
 				print "CO2: ", ccs.geteCO2(), "ppm, TVOC: ", ccs.getTVOC(), " temp: ", temp
 				draw.rectangle((0, 0, image_width, image_height), fill = 0)
-				draw.text((5, 0), time.strftime('Time: %M:%S'), font = font, fill = 255)
+				draw.text((5, 0), time.strftime('Time: %H:%M:%S'), font = font, fill = 255)
 				draw.text((5, 20), 'CO2: %sppm'%(ccs.geteCO2()), font = font, fill = 255)
 				draw.text((5, 40), 'Gas/Particulate: %s'%(ccs.getTVOC()), font = font, fill = 255)
 				draw.text((5, 60), 'Temperature: %s'%(temp), font = font, fill = 255)
