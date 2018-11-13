@@ -1,3 +1,5 @@
+#! /usr/bin/env python
+
 from Adafruit_CCS811 import Adafruit_CCS811
 import epd2in9
 import time
